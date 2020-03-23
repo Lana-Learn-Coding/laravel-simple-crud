@@ -1,9 +1,10 @@
 import Vue from 'vue';
-import './bootstrap'
+import vuetify from "./plugins/vuetify";
 // component registering
-import ExampleComponent from './components/ExampleComponent.vue';
+import AppLayout from './components/AppLayout.vue';
 
-Vue.component('example-component', ExampleComponent);
-
+Vue.component('app-layout', AppLayout);
 // app
-new Vue().$mount('#app');
+new Vue({
+  vuetify,
+}).$mount('#app');
