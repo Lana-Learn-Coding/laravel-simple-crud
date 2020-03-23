@@ -13,6 +13,13 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'vue/max-attributes-per-line': [
+      'warn',
+      {
+        "singleline": 4,
+      }
+    ],
+    'vue/html-self-closing': 'off',
     'vue/component-definition-name-casing': ['warn', 'kebab-case'],
     'vue/component-tags-order': [
       'warn',
