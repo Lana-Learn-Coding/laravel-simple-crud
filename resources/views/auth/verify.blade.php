@@ -1,30 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+    <v-row class="justify-center">
+        <v-col xl="3" lg="4" md="5" sm="7" cols="10">
+            <v-card>
+                <v-card-title>{{ __('Register') }}</v-card-title>
+                <v-card-text>
+                    @if (session('resent'))
+                        <v-alert type="success">
+                            {{ __('A fresh verification link has been sent to your email address.') }}
+                        </v-alert>
+                    @endif
 
-                    <div class="card-body">
-                        @if (session('resent'))
-                            <div class="alert alert-success" role="alert">
-                                {{ __('A fresh verification link has been sent to your email address.') }}
-                            </div>
-                        @endif
-
-                        {{ __('Before proceeding, please check your email for a verification link.') }}
-                        {{ __('If you did not receive the email') }},
-                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                            @csrf
-                            <button type="submit"
-                                    class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>
-                            .
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    {{ __('Before proceeding, please check your email for a verification link.') }}
+                    {{ __('If you did not receive the email') }}
+                    <v-form method="POST" action="{{ route('verification.resend') }}">
+                        @csrf
+                        <v-btn type="submit" text>{{ __('click here to request another') }}</v-btn>
+                    </v-form>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
 @endsection
