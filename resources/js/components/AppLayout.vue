@@ -13,7 +13,7 @@
       <slot name="navigation-drawer"></slot>
     </v-navigation-drawer>
 
-    <v-app-bar clipped-lef app>
+    <v-app-bar clipped-left app>
       <v-app-bar-nav-icon
         v-if="$slots['navigation-drawer']"
         @click.stop="drawer = !drawer"
