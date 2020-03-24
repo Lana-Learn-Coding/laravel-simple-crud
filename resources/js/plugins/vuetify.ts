@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuetify, {
+  VAlert,
   VBtn,
   VCard,
   VCardText,
@@ -23,7 +24,8 @@ Vue.use(Vuetify, {
     VForm,
     VTextField,
     VCheckbox,
-    VBtn
+    VBtn,
+    VAlert
   }
 });
 

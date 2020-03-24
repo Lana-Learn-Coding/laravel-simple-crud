@@ -1,6 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+    <v-row>
+        <v-col xl="3" lg="4" md="5" sm="7" cols="10">
+            <v-card>
+                <v-card-title>{{ __('Register') }}</v-card-title>
+                <v-card-text>
+                    <v-form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <v-text-field
+                            name="name"
+                            value="{{ old('name') }}"
+                        >
+                        </v-text-field>
+                    </v-form>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
