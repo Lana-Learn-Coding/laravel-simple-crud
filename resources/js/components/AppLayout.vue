@@ -14,7 +14,11 @@
     </v-navigation-drawer>
 
     <v-app-bar clipped-lef app>
-      <v-app-bar-nav-icon v-if="$slots['navigation-drawer']" @click.stop="drawer = !drawer"/>
+      <v-app-bar-nav-icon
+        v-if="$slots['navigation-drawer']"
+        @click.stop="drawer = !drawer"
+      >
+      </v-app-bar-nav-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
 
@@ -31,11 +35,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 
 @Component
 export default class AppLayout extends Vue {
-  @Prop({ default: 'Application' }) title!: string;
+  @Prop({default: 'Application'}) title!: string;
   drawer: boolean = false;
 }
 </script>
