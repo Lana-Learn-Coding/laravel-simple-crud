@@ -21,7 +21,8 @@ import Vuetify, {
   VListItemSubtitle,
   VListItemTitle,
   VRow,
-  VTextField,
+  VSpacer,
+  VTextField
 } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
@@ -48,6 +49,7 @@ Vue.use(Vuetify, {
     VIcon,
     VListGroup,
     VDataTable,
+    VSpacer,
   }
 });
 
