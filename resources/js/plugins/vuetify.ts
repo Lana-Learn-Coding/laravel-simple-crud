@@ -10,7 +10,16 @@ import Vuetify, {
   VContainer,
   VForm,
   VRow,
-  VTextField
+  VTextField,
+  VListItem,
+  VList,
+  VListItemAvatar,
+  VListItemTitle,
+  VListItemSubtitle,
+  VListItemContent,
+  VListItemIcon,
+  VDivider, VIcon,
+  VListGroup,
 } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
@@ -25,7 +34,17 @@ Vue.use(Vuetify, {
     VTextField,
     VCheckbox,
     VBtn,
-    VAlert
+    VAlert,
+    VListItem,
+    VList,
+    VListItemAvatar,
+    VListItemTitle,
+    VListItemSubtitle,
+    VListItemContent,
+    VListItemIcon,
+    VDivider,
+    VIcon,
+    VListGroup,
   }
 });
 
@@ -36,4 +55,4 @@ export default new Vuetify({
   icons: {
     iconfont: 'md',
   },
-})
+});
