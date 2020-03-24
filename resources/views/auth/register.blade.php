@@ -14,8 +14,10 @@
                             autocomplete="name"
                             label="{{ __('Name') }}"
                             value="{{ old('name') }}"
-                            @error('name') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('name')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             autofocus
                             required
                         >
@@ -26,8 +28,10 @@
                             autocomplete="email"
                             label="{{ __('E-Mail Address') }}"
                             value="{{ old('email') }}"
-                            @error('email') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('email')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             required
                         >
                         </v-text-field>
@@ -36,8 +40,10 @@
                             type="password"
                             label="{{ __('Password') }}"
                             autocomplete="new-password"
-                            @error('password') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('password')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             required
                         >
                         </v-text-field>

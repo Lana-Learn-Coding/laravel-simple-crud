@@ -17,8 +17,10 @@
                             type="password"
                             label="{{ __('Password')  }}"
                             value="{{ old('name') }}"
-                            @error('password') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('password')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             autocomplete="current-password"
                             required
                         >

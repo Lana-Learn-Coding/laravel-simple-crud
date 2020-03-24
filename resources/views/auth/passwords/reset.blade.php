@@ -15,8 +15,10 @@
                             autocomplete="email"
                             label="{{ __('E-Mail Address') }}"
                             value="{{ $email ?? old('email') }}"
-                            @error('email') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('email')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             autofocus
                             required
                         >

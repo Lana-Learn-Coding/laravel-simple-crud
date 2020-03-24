@@ -11,8 +11,10 @@
                         <v-text-field
                             type="email"
                             label="{{  __('E-Mail Address') }}"
-                            @error('email') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('email')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             autocomplete="email"
                             autofocus
                             name="email"
@@ -23,8 +25,10 @@
                         <v-text-field
                             type="password"
                             label="{{  __('Password') }}"
-                            @error('password') error @enderror
-                            error-messages="{{ $message ?? '' }}"
+                            @error('password')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             name="password"
                             autocomplete="current-password"
                             required
