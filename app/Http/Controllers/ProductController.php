@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -20,8 +21,14 @@ class ProductController extends Controller
 
     public function deleteProduct(int $id)
     {
-        echo "$id";
         Product::destroy($id);
         return response('ok', 200);
+    }
+
+    public function createProduct(Request $request)
+    {
+        $product = Product::create($request->input());
+        $product->save();
+        return redirect('/products');
     }
 }

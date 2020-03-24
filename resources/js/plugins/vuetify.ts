@@ -22,6 +22,7 @@ import Vuetify, {
   VListItemTitle,
   VRow,
   VSpacer,
+  VTextarea,
   VTextField
 } from 'vuetify/lib';
 
@@ -50,6 +51,7 @@ Vue.use(Vuetify, {
     VListGroup,
     VDataTable,
     VSpacer,
+    VTextarea
   }
 });
 
