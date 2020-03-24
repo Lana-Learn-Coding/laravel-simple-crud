@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <v-row>
+    <v-row class="justify-center">
         <v-col xl="3" lg="4" md="5" sm="7" cols="10">
             <v-card>
                 <v-card-title>{{ __('Reset Password') }}</v-card-title>
