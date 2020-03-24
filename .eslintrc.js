@@ -13,6 +13,7 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
+    'vue/valid-v-slot': 'off',
     'vue/max-attributes-per-line': [
       'warn',
       {

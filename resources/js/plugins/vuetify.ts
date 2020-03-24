@@ -8,18 +8,20 @@ import Vuetify, {
   VCheckbox,
   VCol,
   VContainer,
+  VDataTable,
+  VDivider,
   VForm,
-  VRow,
-  VTextField,
-  VListItem,
+  VIcon,
   VList,
+  VListGroup,
+  VListItem,
   VListItemAvatar,
-  VListItemTitle,
-  VListItemSubtitle,
   VListItemContent,
   VListItemIcon,
-  VDivider, VIcon,
-  VListGroup,
+  VListItemSubtitle,
+  VListItemTitle,
+  VRow,
+  VTextField,
 } from 'vuetify/lib';
 
 Vue.use(Vuetify, {
@@ -45,6 +47,7 @@ Vue.use(Vuetify, {
     VDivider,
     VIcon,
     VListGroup,
+    VDataTable,
   }
 });
 

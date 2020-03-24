@@ -35,12 +35,12 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class AppLayout extends Vue {
-  @Prop({default: 'Application'}) title!: string;
-  drawer: boolean = false;
+  @Prop({ default: 'Application' }) title!: string;
+  drawer: boolean = true;
 }
 </script>
 

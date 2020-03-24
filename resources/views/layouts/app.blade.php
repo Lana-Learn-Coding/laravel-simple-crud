@@ -52,6 +52,16 @@
                     <v-list-item-title>Home</v-list-item-title>
                 </v-list-item>
 
+                <v-list-item
+                    link
+                    href="{{ route('products') }}"
+                    @if(request()->routeIs('products')) class="v-list-item--active" @endif>
+                    <v-list-item-icon>
+                        <v-icon>list</v-icon>
+                    </v-list-item-icon>
+                    <v-list-item-title>Products</v-list-item-title>
+                </v-list-item>
+
                 <v-list-group>
                     <template v-slot:activator>
                         <v-list-item-icon>
