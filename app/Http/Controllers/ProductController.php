@@ -15,9 +15,15 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $pageSize = $request->query('size') ?? 10;
+        $sort = $request->query('sort') ?? 'id';
+        $direction = $request->query('direction') ?? 'asc';
+
+        $products = Product::select()
+            ->orderBy($sort, $direction)
+            ->paginate($pageSize);
 
         return view('product/product', [
-            'products' => Product::select()->paginate($pageSize)
+            'products' => $products
         ]);
     }
 

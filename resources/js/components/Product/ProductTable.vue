@@ -11,12 +11,10 @@
     <v-card-text>
       <v-data-table
         :headers="headers"
-        :items="dataPage.data"
-        :server-items-length="dataPage.total"
-        :page="dataPage.current_page"
-        :items-per-page="Number(dataPage.per_page)"
-        @update:page="onPageChange($event)"
-        @update:items-per-page="onPageSizeChange($event)"
+        :items="items"
+        :server-items-length="totalItem"
+        :options="options"
+        @update:options="reload($event)"
       >
         <template #item.actions="{ item }">
           <v-icon small @click="toEditPage(item)">
@@ -67,7 +65,30 @@ import Url from 'domurl';
 export default class ProductTable extends Vue {
   productToDelete: Product = null;
   deleteDialog: boolean = false;
-  @Prop() dataPage!: Page<Product[]>;
+
+  @Prop() dataPage!: Page<Product>;
+
+  created() {
+    console.log(this.dataPage);
+  }
+
+  get items(): Product[] {
+    return this.dataPage.data;
+  }
+
+  get totalItem(): number {
+    return this.dataPage.total;
+  }
+
+  get options(): PagingSortingOptions {
+    const url: Url<any> = new Url<any>(window.location.href);
+    return {
+      page: this.dataPage.current_page,
+      itemsPerPage: Number(this.dataPage.per_page),
+      sortBy: [url.query.sort],
+      sortDesc: url.query.sort ? [url.query.direction === 'desc'] : [],
+    };
+  }
 
   get headers(): ProductTableHeader[] {
     return [
@@ -79,21 +100,26 @@ export default class ProductTable extends Vue {
     ];
   }
 
-  onPageChange(page: number): void {
-    this.dataPage.current_page = page;
-    this.goToNewLocation();
+
+  reload(options: PagingSortingOptions): void {
+    const oldHref: string = this.optionsToHref(this.options);
+    const newHref: string = this.optionsToHref(options);
+    if (oldHref !== newHref) {
+      window.location.href = newHref;
+    }
   }
 
-  onPageSizeChange(page: number): void {
-    this.dataPage.per_page = page;
-    this.goToNewLocation();
-  }
-
-  private goToNewLocation(): void {
+  private optionsToHref(options: PagingSortingOptions): string {
     const url: Url<any> = new Url<any>(window.location.href);
-    url.query.page = this.dataPage.current_page;
-    url.query.size = this.dataPage.per_page;
-    window.location.href = url.toString();
+    url.query.page = options.page;
+    url.query.size = options.itemsPerPage;
+    url.query.sort = options.sortBy[0];
+    if (options.sortBy[0])
+      url.query.direction = options.sortDesc[0] ? 'desc' : 'asc';
+    else
+      delete url.query.direction;
+
+    return url.toString();
   }
 
   toEditPage(product: Product): void {
@@ -118,10 +144,17 @@ export default class ProductTable extends Vue {
 }
 
 interface Page<T> {
-  per_page: string | number;
+  per_page: string;
   total: number;
   current_page: number;
   data: T[];
+}
+
+interface PagingSortingOptions {
+  sortBy: string[];
+  sortDesc: boolean[];
+  page: number,
+  itemsPerPage: number;
 }
 
 interface Product {
