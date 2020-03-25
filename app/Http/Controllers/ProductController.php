@@ -43,4 +43,27 @@ class ProductController extends Controller
         Product::create($request->input());
         return redirect('/products');
     }
+
+    public function getUpdateProductView(Int $id)
+    {
+        $oldProduct = Product::find($id);
+        if ($oldProduct) {
+            return view('product/product-update', [
+                'product' => $oldProduct,
+            ]);
+        }
+        return abort(404);
+    }
+
+    public function updateProduct(Request $request, Int $id)
+    {
+        $request->validate([
+            'name' => 'bail|required|min:3',
+            'price' => 'bail|required|numeric|min:0'
+        ]);
+
+        Product::findOrNew($id)
+            ->update($request->input());
+        return redirect('/products');
+    }
 }

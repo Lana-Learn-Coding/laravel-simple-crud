@@ -20,3 +20,5 @@ Route::get('/products', 'ProductController@index')->name('products');
 Route::post('/products/{id}/delete', 'ProductController@deleteProduct')->name('products.delete');
 Route::post('/products/create', 'ProductController@createProduct')->name('products.delete');
 Route::get('/products/create', fn() => view('product\product-create'))->name('product.create');
+Route::get('/products/{id}/update', 'ProductController@getUpdateProductView')->name('product.update');
+Route::post('/products/{id}/update', 'ProductController@updateProduct')->name('product.update');
