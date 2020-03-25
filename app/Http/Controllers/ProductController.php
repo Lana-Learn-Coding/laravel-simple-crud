@@ -12,10 +12,12 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $pageSize = $request->query('size') ?? 10;
+
         return view('product/product', [
-            'products' => Product::all()
+            'products' => Product::select()->paginate($pageSize)
         ]);
     }
 
@@ -27,8 +29,12 @@ class ProductController extends Controller
 
     public function createProduct(Request $request)
     {
-        $product = Product::create($request->input());
-        $product->save();
+        $request->validate([
+            'name' => 'bail|required|min:3',
+            'price' => 'bail|required|numeric|min:0'
+        ]);
+
+        Product::create($request->input());
         return redirect('/products');
     }
 }

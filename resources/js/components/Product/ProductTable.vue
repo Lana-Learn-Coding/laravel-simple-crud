@@ -10,10 +10,13 @@
     </v-card-title>
     <v-card-text>
       <v-data-table
-        disable-pagination
-        hide-default-footer
         :headers="headers"
-        :items="data"
+        :items="dataPage.data"
+        :server-items-length="dataPage.total"
+        :page="dataPage.current_page"
+        :items-per-page="Number(dataPage.per_page)"
+        @update:page="onPageChange($event)"
+        @update:items-per-page="onPageSizeChange($event)"
       >
         <template #item.actions="{ item }">
           <v-icon small @click="toEditPage(item)">
@@ -58,12 +61,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
+import Url from 'domurl';
 
 @Component
 export default class ProductTable extends Vue {
   productToDelete: Product = null;
   deleteDialog: boolean = false;
-  @Prop({ default: (): Product[] => [] }) data!: Product[];
+  @Prop() dataPage!: Page<Product[]>;
 
   get headers(): ProductTableHeader[] {
     return [
@@ -73,6 +77,23 @@ export default class ProductTable extends Vue {
       { text: 'Description', value: 'description' },
       { text: 'Actions', value: 'actions', sortable: false },
     ];
+  }
+
+  onPageChange(page: number): void {
+    this.dataPage.current_page = page;
+    this.goToNewLocation();
+  }
+
+  onPageSizeChange(page: number): void {
+    this.dataPage.per_page = page;
+    this.goToNewLocation();
+  }
+
+  private goToNewLocation(): void {
+    const url: Url<any> = new Url<any>(window.location.href);
+    url.query.page = this.dataPage.current_page;
+    url.query.size = this.dataPage.per_page;
+    window.location.href = url.toString();
   }
 
   toEditPage(product: Product): void {
@@ -94,6 +115,13 @@ export default class ProductTable extends Vue {
         });
     }
   }
+}
+
+interface Page<T> {
+  per_page: string | number;
+  total: number;
+  current_page: number;
+  data: T[];
 }
 
 interface Product {

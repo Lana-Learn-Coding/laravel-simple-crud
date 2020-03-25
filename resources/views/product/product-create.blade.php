@@ -12,6 +12,11 @@
                             name="name"
                             type="text"
                             label="Name"
+                            autocomplate="name"
+                            @error('name')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                             autofocus
                         >
                         </v-text-field>
@@ -27,6 +32,10 @@
                             label="Price"
                             name="price"
                             type="number"
+                            @error('price')
+                            error
+                            error-messages="{{ $message }}"
+                            @enderror
                         >
                         </v-text-field>
                         <v-btn text type="submit"> Create</v-btn>
