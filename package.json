@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/domurl": "0.0.5",
     "@types/vue": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
@@ -31,7 +32,8 @@
     "vuetify-loader": "^1.4.3"
   },
   "dependencies": {
-    "vuetify": "^2.2.18",
-    "axios": "^0.19"
+    "axios": "^0.19",
+    "domurl": "^2.3.0",
+    "vuetify": "^2.2.18"
   }
 }
