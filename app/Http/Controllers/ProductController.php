@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Repositories\Interfaces\ProductRepositoryInterface as ProductRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    private ProductRepository $productRepo;
+
+    public function __construct(ProductRepository $productRepo)
     {
+        $this->productRepo = $productRepo;
         $this->middleware('auth');
     }
 
@@ -18,7 +22,7 @@ class ProductController extends Controller
         $sort = $request->query('sort') ?? 'id';
         $direction = $request->query('direction') ?? 'asc';
 
-        $products = Product::select()
+        $products = $this->productRepo->findAll()
             ->orderBy($sort, $direction)
             ->paginate($pageSize);
 
@@ -29,7 +33,7 @@ class ProductController extends Controller
 
     public function deleteProduct(int $id)
     {
-        Product::destroy($id);
+        $this->productRepo->delete($id);
         return response('ok', 200);
     }
 
@@ -40,19 +44,20 @@ class ProductController extends Controller
             'price' => 'bail|required|numeric|min:0'
         ]);
 
-        Product::create($request->input());
+        $this->productRepo->create($request->input());
         return redirect('/products');
     }
 
     public function getUpdateProductView(Int $id)
     {
-        $oldProduct = Product::find($id);
-        if ($oldProduct) {
+        try {
+            $product = $this->productRepo->findOne($id);
             return view('product/product-update', [
-                'product' => $oldProduct,
+                'product' => $product,
             ]);
+        } catch (Exception $e) {
+            return abort(404);
         }
-        return abort(404);
     }
 
     public function updateProduct(Request $request, Int $id)
@@ -62,8 +67,11 @@ class ProductController extends Controller
             'price' => 'bail|required|numeric|min:0'
         ]);
 
-        Product::findOrNew($id)
-            ->update($request->input());
-        return redirect('/products');
+        try {
+            $this->productRepo->update($id, $request->input());
+            return redirect('/products');
+        } catch (Exception $e) {
+            return abort(404);
+        }
     }
 }
