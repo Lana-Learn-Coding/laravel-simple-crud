@@ -30,7 +30,7 @@
     "vuetify-loader": "^1.4.3"
   },
   "dependencies": {
-    "axios": "^0.19",
+    "axios": "^0.21",
     "domurl": "^2.3.0",
     "vuetify": "^2.2.18"
   }
